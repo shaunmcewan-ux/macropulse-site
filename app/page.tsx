@@ -15,9 +15,51 @@ import {
   Sparkles,
   TrendingUp,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+function Button({
+  children,
+  className = "",
+  variant = "default",
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "default" | "ghost" | "outline" }) {
+  const base = "inline-flex items-center justify-center transition font-medium";
+  const variants = {
+    default: "bg-white text-neutral-950 hover:bg-white/90",
+    ghost: "bg-transparent text-white/80 hover:bg-white/5 hover:text-white",
+    outline: "border border-white/15 bg-transparent text-white hover:bg-white/5",
+  };
+  return (
+    <button className={`${base} ${variants[variant]} ${className}`} {...props}>
+      {children}
+    </button>
+  );
+}
+
+function Card({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <div className={`border ${className}`}>{children}</div>;
+}
+
+function CardContent({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <div className={className}>{children}</div>;
+}
+
+function Input({
+  className = "",
+  ...props
+}: React.InputHTMLAttributes<HTMLInputElement>) {
+  return <input className={`w-full ${className}`} {...props} />;
+}
 
 const navItems = [
   { label: "Framework", href: "#framework" },
