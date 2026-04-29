@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">BTC versus S&amp;P 500 versus gold over the last 10 years — cumulative percentage return</title>
+  <desc id="desc">A log-scale comparison of cumulative percentage returns from April 2016 to April 2026. BTC has gained around 16,000 percent while the S&amp;P 500 has gained around 230 percent and gold around 280 percent.</desc>
+
+  <!-- Background -->
+  <rect width="640" height="360" rx="24" fill="#0d151d"/>
+
+  <!-- Title block -->
+  <text x="28" y="34" fill="#f4f7f9" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700">BTC vs S&amp;P 500 vs Gold</text>
+  <text x="28" y="56" fill="#9db0bf" font-family="Arial, Helvetica, sans-serif" font-size="12">Cumulative % return, indexed to April 2016 = 0%. Log scale.</text>
+
+  <!-- Chart area: x 70 → 600, y 90 → 300 -->
+  <!-- Horizontal gridlines at 0%, +200%, +900%, +2,900%, +9,900%, +29,900% -->
+  <line x1="70" y1="300" x2="600" y2="300" stroke="#243241"/>
+  <line x1="70" y1="266" x2="600" y2="266" stroke="#1f2d3a" stroke-dasharray="2 4"/>
+  <line x1="70" y1="229" x2="600" y2="229" stroke="#1f2d3a" stroke-dasharray="2 4"/>
+  <line x1="70" y1="195" x2="600" y2="195" stroke="#1f2d3a" stroke-dasharray="2 4"/>
+  <line x1="70" y1="157" x2="600" y2="157" stroke="#1f2d3a" stroke-dasharray="2 4"/>
+  <line x1="70" y1="122" x2="600" y2="122" stroke="#1f2d3a" stroke-dasharray="2 4"/>
+
+  <!-- Y-axis labels (percent) -->
+  <text x="62" y="304" text-anchor="end" fill="#9db0bf" font-family="Arial, Helvetica, sans-serif" font-size="11">0%</text>
+  <text x="62" y="270" text-anchor="end" fill="#9db0bf" font-family="Arial, Helvetica, sans-serif" font-size="11">+200%</text>
+  <text x="62" y="233" text-anchor="end" fill="#9db0bf" font-family="Arial, Helvetica, sans-serif" font-size="11">+900%</text>
+  <text x="62" y="199" text-anchor="end" fill="#9db0bf" font-family="Arial, Helvetica, sans-serif" font-size="11">+2,900%</text>
+  <text x="62" y="161" text-anchor="end" fill="#9db0bf" font-family="Arial, Helvetica, sans-serif" font-size="11">+9,900%</text>
+  <text x="62" y="126" text-anchor="end" fill="#9db0bf" font-family="Arial, Helvetica, sans-serif" font-size="11">+29,900%</text>
+
+  <!-- Data lines (all start at y=300 for 0% at April 2016) -->
+  <!-- BTC endpoint: +16,191% → log10(162.91)=2.212 → y=300-71.4*2.212=142 -->
+  <polyline fill="none" stroke="#ff9d2f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"
+            points="70,300 130,278 190,252 250,224 310,196 370,178 430,164 490,154 550,148 600,142"/>
+  <!-- S&P endpoint: +231% → log10(3.31)=0.520 → y=300-71.4*0.520=263 -->
+  <polyline fill="none" stroke="#58d8ef" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"
+            points="70,300 130,295 190,290 250,285 310,280 370,277 430,273 490,269 550,266 600,263"/>
+  <!-- Gold endpoint: +283% → log10(3.83)=0.583 → y=300-71.4*0.583=258 -->
+  <polyline fill="none" stroke="#f3d17a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"
+            points="70,300 130,296 190,290 250,284 310,278 370,273 430,268 490,264 550,261 600,258"/>
+
+  <!-- Start and end markers -->
+  <circle cx="70" cy="300" r="4" fill="#ff9d2f"/>
+  <circle cx="600" cy="142" r="4.5" fill="#ff9d2f"/>
+  <circle cx="600" cy="263" r="4" fill="#58d8ef"/>
+  <circle cx="600" cy="258" r="4" fill="#f3d17a"/>
+
+  <!-- X-axis labels -->
+  <text x="70" y="322" text-anchor="middle" fill="#9db0bf" font-family="Arial, Helvetica, sans-serif" font-size="11">Apr 2016</text>
+  <text x="335" y="322" text-anchor="middle" fill="#9db0bf" font-family="Arial, Helvetica, sans-serif" font-size="11">Apr 2021</text>
+  <text x="600" y="322" text-anchor="middle" fill="#9db0bf" font-family="Arial, Helvetica, sans-serif" font-size="11">Apr 2026</text>
+
+  <!-- Legend card positioned inside plot area, bottom-left of interior so it doesn't collide with BTC line -->
+  <rect x="86" y="142" width="196" height="76" rx="12" fill="#121d27" stroke="#243241"/>
+  <circle cx="102" cy="162" r="5" fill="#ff9d2f"/>
+  <text x="114" y="166" fill="#f4f7f9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">BTC</text>
+  <text x="276" y="166" text-anchor="end" fill="#ff9d2f" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">+16,191%</text>
+  <circle cx="102" cy="185" r="5" fill="#58d8ef"/>
+  <text x="114" y="189" fill="#f4f7f9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">S&amp;P 500</text>
+  <text x="276" y="189" text-anchor="end" fill="#58d8ef" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">+231%</text>
+  <circle cx="102" cy="208" r="5" fill="#f3d17a"/>
+  <text x="114" y="212" fill="#f4f7f9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">Gold</text>
+  <text x="276" y="212" text-anchor="end" fill="#f3d17a" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">+283%</text>
+
+  <!-- Source line -->
+  <text x="28" y="346" fill="#6e8294" font-family="Arial, Helvetica, sans-serif" font-size="10">Sources: CoinGecko, StatMuse, MacroTrends. Indexed snapshots, illustrative only — not a precise total-return series.</text>
+</svg>
