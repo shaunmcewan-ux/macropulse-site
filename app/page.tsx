@@ -63,6 +63,91 @@ function Input({
   return <input className={`w-full ${className}`} {...props} />;
 }
 
+function SubscribeCard() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("loading");
+    setMessage("");
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStatus("success");
+        setMessage("You're subscribed. Check your inbox for the intro pack.");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setStatus("error");
+      setMessage("Could not reach the server. Please try again.");
+    }
+  }
+
+  return (
+    <Card className="rounded-[2rem] border-white/10 bg-gradient-to-br from-white/8 to-white/3">
+      <CardContent className="p-8 md:p-10">
+        <div className="text-xs uppercase tracking-[0.28em] text-white/40">Subscribe</div>
+        <h3 className="mt-4 text-3xl font-semibold tracking-tight text-white">Join the MacroPulse list</h3>
+        <p className="mt-4 text-base leading-8 text-white/68">
+          Start with the intro framework and receive weekly macro-led crypto analysis designed for investors who want a repeatable edge.
+        </p>
+
+        {status === "success" ? (
+          <div className="mt-8 rounded-2xl border border-green-500/30 bg-green-500/10 px-5 py-4 text-sm text-green-400">
+            {message}
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+            <div className="relative">
+              <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/35" />
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                disabled={status === "loading"}
+                className="h-12 rounded-2xl border-white/10 bg-neutral-950/80 pl-11 text-white placeholder:text-white/35 disabled:opacity-50"
+              />
+            </div>
+            {status === "error" && (
+              <p className="text-xs text-red-400">{message}</p>
+            )}
+            <Button
+              type="submit"
+              disabled={status === "loading"}
+              className="h-12 w-full rounded-2xl bg-white text-base text-neutral-950 hover:bg-white/90 disabled:opacity-60"
+            >
+              {status === "loading" ? "Subscribing..." : "Subscribe now"}
+              {status !== "loading" && <ChevronRight className="ml-2 h-4 w-4" />}
+            </Button>
+          </form>
+        )}
+
+        <div className="mt-8 rounded-[1.5rem] border border-white/10 bg-neutral-950/50 p-5">
+          <div className="text-xs uppercase tracking-[0.24em] text-white/40">Includes</div>
+          <div className="mt-4 space-y-3 text-sm text-white/75">
+            <div>• Weekly MacroPulse note</div>
+            <div>• Dial reading and confidence score</div>
+            <div>• BTC vs alt regime context</div>
+            <div>• Macro glossary and framework access</div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 const navItems = [
   { label: "Framework", href: "#framework" },
   { label: "Dial", href: "#dial" },
@@ -560,39 +645,7 @@ export default function MacroPulseWebsite() {
               </CardContent>
             </Card>
 
-            <Card className="rounded-[2rem] border-white/10 bg-gradient-to-br from-white/8 to-white/3">
-              <CardContent className="p-8 md:p-10">
-                <div className="text-xs uppercase tracking-[0.28em] text-white/40">Subscribe</div>
-                <h3 className="mt-4 text-3xl font-semibold tracking-tight text-white">Join the MacroPulse list</h3>
-                <p className="mt-4 text-base leading-8 text-white/68">
-                  Start with the intro framework and receive weekly macro-led crypto analysis designed for investors who want a repeatable edge.
-                </p>
-
-                <div className="mt-8 space-y-4">
-                  <div className="relative">
-                    <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/35" />
-                    <Input
-                      placeholder="Enter your email"
-                      className="h-12 rounded-2xl border-white/10 bg-neutral-950/80 pl-11 text-white placeholder:text-white/35"
-                    />
-                  </div>
-                  <Button className="h-12 w-full rounded-2xl bg-white text-base text-neutral-950 hover:bg-white/90">
-                    Subscribe now
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-
-                <div className="mt-8 rounded-[1.5rem] border border-white/10 bg-neutral-950/50 p-5">
-                  <div className="text-xs uppercase tracking-[0.24em] text-white/40">Includes</div>
-                  <div className="mt-4 space-y-3 text-sm text-white/75">
-                    <div>• Weekly MacroPulse note</div>
-                    <div>• Dial reading and confidence score</div>
-                    <div>• BTC vs alt regime context</div>
-                    <div>• Macro glossary and framework access</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <SubscribeCard />
           </div>
         </section>
 
